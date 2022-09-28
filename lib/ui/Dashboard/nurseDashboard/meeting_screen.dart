@@ -30,11 +30,11 @@ class MeetingScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        elevation: 0,
-        title: Text("Call"),
-        backgroundColor: customblue,
-      ),
+      // appBar: AppBar(
+      //   elevation: 0,
+      //   title: Text("Call"),
+      //   backgroundColor: customblue,
+      // ),
       body: Column(
         children: [
           SizedBox(

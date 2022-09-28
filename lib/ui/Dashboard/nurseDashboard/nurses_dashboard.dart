@@ -6,6 +6,7 @@ import 'package:doctor/ui/Dashboard/nurseDashboard/nurse_home.dart';
 import 'package:doctor/ui/Dashboard/nurseDashboard/nurse_profile.dart';
 import 'package:doctor/ui/Dashboard/nurseDashboard/nurses_Opd.dart';
 import 'package:doctor/ui/Dashboard/nurseDashboard/nurses_ward.dart';
+import 'package:doctor/ui/communication_screen.dart';
 import 'package:doctor/widgets/customAppBar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
@@ -37,7 +38,8 @@ class _NursesDashboardState extends State<NursesDashboard> {
       NursesHome(),
       NursesOpd(),
       NursesWard(),
-      MeetingScreen(),
+      CommunicationScreen(),
+      // MeetingScreen(),
       DoctorsProfile()
       //  NursesProfile()
     ];
