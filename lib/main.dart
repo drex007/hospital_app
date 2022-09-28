@@ -36,7 +36,7 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  GenericController _controller = Get.put(GenericController());
+  GenericController _controller = Get.put(GenericController()); 
   // This widget is the root of your application.
   @override
   void initState() {

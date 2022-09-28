@@ -1,6 +1,7 @@
 import 'package:doctor/Services/profile_controller/profile_controller.dart';
 import 'package:doctor/constants/asset_path.dart';
 import 'package:doctor/ui/Dashboard/doctorsDashboard/doctorsProfile.dart';
+import 'package:doctor/ui/Dashboard/nurseDashboard/meeting_screen.dart';
 import 'package:doctor/ui/Dashboard/nurseDashboard/nurse_home.dart';
 import 'package:doctor/ui/Dashboard/nurseDashboard/nurse_profile.dart';
 import 'package:doctor/ui/Dashboard/nurseDashboard/nurses_Opd.dart';
@@ -36,6 +37,7 @@ class _NursesDashboardState extends State<NursesDashboard> {
       NursesHome(),
       NursesOpd(),
       NursesWard(),
+      MeetingScreen(),
       DoctorsProfile()
       //  NursesProfile()
     ];
@@ -74,6 +76,12 @@ class _NursesDashboardState extends State<NursesDashboard> {
                   // color: Colors.black,
                 ),
                 label: "Ward"),
+            BottomNavigationBarItem(
+                icon: Icon(
+                  Icons.call,
+                  // color: Colors.black,
+                ),
+                label: "Call"),
             BottomNavigationBarItem(
                 icon: Icon(
                   Icons.person,

@@ -188,6 +188,24 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "jitsi_meet",
+      "rootUri": "file:///home/zuumatek/dev/flutter/.pub-cache/hosted/pub.dartlang.org/jitsi_meet-4.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "jitsi_meet_platform_interface",
+      "rootUri": "file:///home/zuumatek/dev/flutter/.pub-cache/hosted/pub.dartlang.org/jitsi_meet_platform_interface-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "jitsi_meet_web_plugin",
+      "rootUri": "file:///home/zuumatek/dev/flutter/.pub-cache/hosted/pub.dartlang.org/jitsi_meet_web_plugin-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "js",
       "rootUri": "file:///home/zuumatek/dev/flutter/.pub-cache/hosted/pub.dartlang.org/js-0.6.4",
       "packageUri": "lib/",
@@ -386,7 +404,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-09-27T15:46:42.787361Z",
+  "generated": "2022-09-28T08:11:41.375017Z",
   "generator": "pub",
   "generatorVersion": "2.17.1"
 }
