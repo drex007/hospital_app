@@ -22,6 +22,7 @@ class _JoinMeetingState extends State<JoinMeeting> {
   final JitsiMeetMethods _jitsiMeetMethods = JitsiMeetMethods();
   bool isAudioMuted = true;
   bool isVideoMuted = true;
+  
   @override
   initState() {
     meetingIdController = TextEditingController();

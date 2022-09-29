@@ -1,9 +1,12 @@
 import 'package:doctor/Services/authController/login_controller.dart';
 import 'package:doctor/Services/authController/login_controller.dart';
 import 'package:doctor/Services/doctorController/doctor_services.dart';
+import 'package:doctor/Services/generic_api_service.dart';
 import 'package:doctor/Services/nursesController/nurse_services.dart';
 import 'package:doctor/Services/profile_controller/profile_controller.dart';
+import 'package:doctor/Services/socket_service.dart';
 import 'package:doctor/repository/doctor_repository.dart';
+import 'package:doctor/repository/generic_repo.dart';
 import 'package:doctor/repository/nurse_repo.dart';
 import 'package:get/get_state_manager/src/rx_flutter/rx_getx_widget.dart';
 import 'package:get/get_state_manager/src/simple/get_controllers.dart';
@@ -17,6 +20,9 @@ class GenericController extends GetxController {
     ProfileController _profile = Get.put(ProfileController());
     NurseServices _nurseServices = Get.put(NurseServices());
     DoctorRepository doctorRepository = Get.put(DoctorRepository());
+    GenericRepository _genericRespository = Get.put(GenericRepository());
     DoctorServices _doctorServices = Get.put(DoctorServices());
+    SocketServices _socketServices = Get.put(SocketServices());
+    GenericApiServices _genericApiServices = Get.put(GenericApiServices());
   }
 }

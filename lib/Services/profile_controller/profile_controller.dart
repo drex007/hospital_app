@@ -43,7 +43,7 @@ class ProfileController extends GetxController {
       // print("dataaaaaaaaa ${jsonData}");
 
     } catch (e) {
-      print(e);
+      // print(e);
     }
   }
 

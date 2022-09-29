@@ -212,6 +212,12 @@
       "languageVersion": "2.16"
     },
     {
+      "name": "logging",
+      "rootUri": "file:///home/zuumatek/dev/flutter/.pub-cache/hosted/pub.dartlang.org/logging-1.0.2",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "matcher",
       "rootUri": "file:///home/zuumatek/dev/flutter/.pub-cache/hosted/pub.dartlang.org/matcher-0.12.11",
       "packageUri": "lib/",
@@ -326,6 +332,18 @@
       "languageVersion": "2.12"
     },
     {
+      "name": "socket_io_client",
+      "rootUri": "file:///home/zuumatek/dev/flutter/.pub-cache/hosted/pub.dartlang.org/socket_io_client-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
+      "name": "socket_io_common",
+      "rootUri": "file:///home/zuumatek/dev/flutter/.pub-cache/hosted/pub.dartlang.org/socket_io_common-2.0.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
+    },
+    {
       "name": "source_span",
       "rootUri": "file:///home/zuumatek/dev/flutter/.pub-cache/hosted/pub.dartlang.org/source_span-1.8.2",
       "packageUri": "lib/",
@@ -404,7 +422,7 @@
       "languageVersion": "2.17"
     }
   ],
-  "generated": "2022-09-28T08:11:41.375017Z",
+  "generated": "2022-09-29T07:37:18.101175Z",
   "generator": "pub",
   "generatorVersion": "2.17.1"
 }

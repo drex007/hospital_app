@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:doctor/Services/authController/login_controller.dart';
 import 'package:doctor/Services/profile_controller/profile_controller.dart';
+import 'package:doctor/Services/socket_service.dart';
 import 'package:doctor/constants/asset_path.dart';
 import 'package:doctor/constants/url_paths.dart';
 import 'package:doctor/model/profileModel.dart';
@@ -11,6 +12,7 @@ import 'package:doctor/widgets/customIconInputTextWidget.dart';
 import 'package:doctor/widgets/customSemiBoldTextWidget.dart';
 import 'package:doctor/widgets/customTitledInputWidget.dart';
 import 'package:flutter/material.dart';
+import 'package:get_storage/get_storage.dart';
 import '../../../utils/responsive.dart';
 import '../../../constants/color_constant.dart';
 import 'package:get/get.dart';
@@ -27,6 +29,7 @@ class _DoctorsProfileState extends State<DoctorsProfile> {
   ProfileController _profileController = Get.find();
   final ImagePicker _picker = ImagePicker();
   File? _profileImage;
+
   @override
   void initState() {
     _profileController.getUserProfile();
@@ -38,7 +41,17 @@ class _DoctorsProfileState extends State<DoctorsProfile> {
     var newUrl = url.removeLast();
     var assetUrl = url.join();
 
+    final authStorage = GetStorage();
     AuthController authController = Get.find();
+    SocketServices _socketServices = Get.find();
+    LoginRedirectController _redirectUser = Get.find();
+
+    void logout() {
+      authStorage.erase();
+      _redirectUser.userStatus.value = "";
+      _socketServices.socket.disconnect();
+      Get.offAllNamed("/login");
+    }
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -185,7 +198,7 @@ class _DoctorsProfileState extends State<DoctorsProfile> {
                         RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0),
                     ))),
-                onPressed: () => {authController.logout()},
+                onPressed: logout,
                 child: Text(
                   "Log out",
                   style: TextStyle(fontFamily: "Poppins", fontSize: 20.0.sp),

@@ -1,5 +1,6 @@
 import 'package:doctor/Services/nursesController/nurse_services.dart';
 import 'package:doctor/Services/profile_controller/profile_controller.dart';
+import 'package:doctor/Services/socket_service.dart';
 import 'package:doctor/constants/asset_path.dart';
 import 'package:doctor/constants/color_constant.dart';
 import 'package:doctor/constants/url_paths.dart';
@@ -21,6 +22,7 @@ class NursesHome extends StatefulWidget {
 class _NursesHomeState extends State<NursesHome> {
   ProfileController _profile = Get.find();
   NurseServices _nurseServices = Get.find();
+  SocketServices _socketServices = Get.find();
   NursesRepository _nursesRepository = Get.find();
   List homeImages = [injection, ward, bed, inpatient];
   List imageTitles = ["Opd Count", "Ward Count", "Bed spaces", "Inpatients"];
@@ -32,6 +34,7 @@ class _NursesHomeState extends State<NursesHome> {
       _nurseServices.opdPatients();
       _nurseServices.getWardList();
       _nurseServices.getWardBedspaceCount();
+      _socketServices.initializeSocket();
     });
     super.initState();
   }
@@ -44,7 +47,7 @@ class _NursesHomeState extends State<NursesHome> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(0.0.hp),
         child: AppBar(
-          backgroundColor: Colors.lightBlue,
+          backgroundColor: Colors.purple,
           elevation: 0,
         ),
       ),
@@ -56,7 +59,7 @@ class _NursesHomeState extends State<NursesHome> {
               Container(
                 height: 100,
                 decoration: BoxDecoration(
-                  color: Colors.lightBlue,
+                  color: Colors.purple,
                   boxShadow: [
                     BoxShadow(
                       blurRadius: 0.5,

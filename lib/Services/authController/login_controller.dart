@@ -2,6 +2,8 @@
 
 import 'dart:async';
 import 'dart:convert';
+import 'package:doctor/Services/nursesController/nurse_services.dart';
+import 'package:doctor/Services/socket_service.dart';
 import 'package:doctor/ui/Dashboard/doctorsDashboard/doctor_dashboard.dart';
 import 'package:doctor/ui/Dashboard/nurseDashboard/nurses_dashboard.dart';
 import 'package:doctor/ui/LoginPage/login.dart';
@@ -14,6 +16,7 @@ import '../../constants/url_paths.dart';
 
 class AuthController extends GetxController {
   LoginRedirectController _redirectUser = Get.find();
+  // SocketServices _socketServices = Get.find();
   RxString loginState = "start".obs;
   final auth_storage = GetStorage();
 
@@ -39,12 +42,12 @@ class AuthController extends GetxController {
         auth_storage.write("usersRole", "");
         LoginPage();
       }
-      print(response_body);
+      // print(response_body);
       Get.snackbar("Login Mesage", "Login successful",
           backgroundColor: Colors.blue.withOpacity(0.3));
       return response;
     } catch (e) {
-      print(e);
+      // print(e);
       // loginState.value = "start";
       Get.snackbar("An Error occurred",
           "Please check your email and password and try again later",
@@ -55,6 +58,7 @@ class AuthController extends GetxController {
   void logout() {
     auth_storage.erase();
     _redirectUser.userStatus.value = "";
+    // _socketServices.socket.destroy();
     Get.offAllNamed("/login");
   }
 }
