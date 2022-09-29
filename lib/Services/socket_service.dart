@@ -14,7 +14,7 @@ class SocketServices extends GetxController {
   final ProfileController _profileController = Get.find();
   final JitsiMeetMethods _jitsiMeetMethods = JitsiMeetMethods();
 
-  bool isAudioMuted = true;
+  bool isAudioMuted = true; 
   bool isVideoMuted = true;
   int callNotificationDuration = 120;
 
