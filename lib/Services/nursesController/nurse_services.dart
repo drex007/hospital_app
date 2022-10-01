@@ -25,14 +25,44 @@ class NurseServices extends GetxController {
     try {
       var response = await http.get(wardUrl,
           headers: {"authorization": "Bearer ${tokenStorage.read("token")}"});
+      var jsonData = jsonDecode(response.body);
+
       if (response.statusCode == 200) {
         _nurseRepo.wardList.clear();
-        var jsonData = jsonDecode(response.body);
 
         for (var item in jsonData) {
           _nurseRepo.wardList.add(WardModel.fromJson(item));
         }
       }
+
+      if (response.statusCode == 401) {
+        var response = await http.post(
+          Uri.parse('${backendRequestUrl}auth/jwt/refresh/'),
+          headers: {"authorization": "Bearer ${tokenStorage.read("token")}"},
+          body: {"refresh": tokenStorage.read('refresh')},
+        );
+
+        if (response.statusCode == 200) {
+          var jsonData = jsonDecode(response.body);
+          tokenStorage.write('access', jsonData['access']);
+
+          var response2 = await http.get(
+            wardUrl,
+            headers: {"authorization": "Bearer ${jsonData['access']}"},
+          );
+
+          var jsonData2 = jsonDecode(response2.body);
+          debugPrint("${jsonData2} :: ward res");
+
+          _nurseRepo.wardList.clear();
+          if (response2.statusCode == 200) {
+            for (var item in jsonData2) {
+              _nurseRepo.wardList.add(WardModel.fromJson(item));
+            }
+          }
+        }
+      }
+
       return _nurseRepo.wardList;
     } catch (e) {}
   }
@@ -50,6 +80,29 @@ class NurseServices extends GetxController {
       if (response.statusCode == 200) {
         for (var item in jsonData) {
           _nurseRepo.bedSpaceList.add(BedSpaceModel.fromJson(item));
+        }
+      }
+
+      if (response.statusCode == 401) {
+        var response = await http.post(
+          Uri.parse('${backendRequestUrl}auth/jwt/refresh/'),
+          headers: {"authorization": "Bearer ${tokenStorage.read("token")}"},
+          body: {"refresh": tokenStorage.read('refresh')},
+        );
+
+        if (response.statusCode == 200) {
+          var jsonData = jsonDecode(response.body);
+          tokenStorage.write('access', jsonData['access']);
+
+          var response2 = await http.get(
+            wardBedSpacesUrl,
+            headers: {"authorization": "Bearer ${jsonData['access']}"},
+          );
+          var jsonData2 = jsonDecode(response2.body);
+          _nurseRepo.bedSpaceList.clear();
+          for (var item in jsonData2) {
+            _nurseRepo.bedSpaceList.add(BedSpaceModel.fromJson(item));
+          }
         }
       }
 
@@ -72,6 +125,29 @@ class NurseServices extends GetxController {
           _nurseRepo.WardReport.add(WardModel.fromJson(item));
         }
       }
+
+      if (response.statusCode == 401) {
+        var response = await http.post(
+          Uri.parse('${backendRequestUrl}auth/jwt/refresh/'),
+          headers: {"authorization": "Bearer ${tokenStorage.read("token")}"},
+          body: {"refresh": tokenStorage.read('refresh')},
+        );
+
+        if (response.statusCode == 200) {
+          var jsonData = jsonDecode(response.body);
+          tokenStorage.write('access', jsonData['access']);
+
+          var response2 = await http.get(
+            wardBedSpacesUrl,
+            headers: {"authorization": "Bearer ${jsonData['access']}"},
+          );
+          var jsonData2 = jsonDecode(response2.body);
+          _nurseRepo.WardReport.clear();
+          for (var item in jsonData2) {
+            _nurseRepo.WardReport.add(WardModel.fromJson(item));
+          }
+        }
+      }
       _nurseRepo.WardReport.refresh();
     } catch (e) {}
   }
@@ -84,11 +160,36 @@ class NurseServices extends GetxController {
       var response = await http.get(opdUrl,
           headers: {"authorization": "Bearer ${tokenStorage.read("token")}"});
       var jsonData = jsonDecode(response.body);
+      // print("${jsonData}");
 
       _nurseRepo.opdList.clear();
       if (response.statusCode == 200) {
+        // print("printed");
         for (var item in jsonData) {
           _nurseRepo.opdList.add(OpdModel.fromJson(item));
+        }
+      }
+
+      if (response.statusCode == 401) {
+        var response = await http.post(
+          Uri.parse('${backendRequestUrl}auth/jwt/refresh/'),
+          headers: {"authorization": "Bearer ${tokenStorage.read("token")}"},
+          body: {"refresh": tokenStorage.read('refresh')},
+        );
+
+        if (response.statusCode == 200) {
+          var jsonData = jsonDecode(response.body);
+          tokenStorage.write('access', jsonData['access']);
+
+          var response2 = await http.get(
+            opdUrl,
+            headers: {"authorization": "Bearer ${jsonData['access']}"},
+          );
+          var jsonData2 = jsonDecode(response2.body);
+          _nurseRepo.opdList.clear();
+          for (var item in jsonData2) {
+            _nurseRepo.opdList.add(OpdModel.fromJson(item));
+          }
         }
       }
     } catch (e) {}
@@ -111,6 +212,30 @@ class NurseServices extends GetxController {
               .add(PatientDiagnosisModel.fromJson(item));
         }
       }
+
+      if (response.statusCode == 401) {
+        var response = await http.post(
+          Uri.parse('${backendRequestUrl}auth/jwt/refresh/'),
+          headers: {"authorization": "Bearer ${tokenStorage.read("token")}"},
+          body: {"refresh": tokenStorage.read('refresh')},
+        );
+
+        if (response.statusCode == 200) {
+          var jsonData = jsonDecode(response.body);
+          tokenStorage.write('access', jsonData['access']);
+
+          var response2 = await http.get(
+            injectionRequestUrl,
+            headers: {"authorization": "Bearer ${jsonData['access']}"},
+          );
+          var jsonData2 = jsonDecode(response2.body);
+          _nurseRepo.patientDiagnosisList.clear();
+          for (var item in jsonData2) {
+            _nurseRepo.patientDiagnosisList
+                .add(PatientDiagnosisModel.fromJson(item));
+          }
+        }
+      }
       _nurseRepo.patientDiagnosisList.refresh();
     } catch (e) {}
   }
@@ -129,6 +254,30 @@ class NurseServices extends GetxController {
         for (var item in jsonData) {
           _nurseRepo.patientPerformanceData
               .add(PatientPerformanceData.fromJson(item));
+        }
+      }
+      //Check for expired token
+      if (response.statusCode == 401) {
+        var response = await http.post(
+          Uri.parse('${backendRequestUrl}auth/jwt/refresh/'),
+          headers: {"authorization": "Bearer ${tokenStorage.read("token")}"},
+          body: {"refresh": tokenStorage.read('refresh')},
+        );
+
+        if (response.statusCode == 200) {
+          var jsonData = jsonDecode(response.body);
+          tokenStorage.write('access', jsonData['access']);
+
+          var response2 = await http.get(
+            injectionRequestUrl,
+            headers: {"authorization": "Bearer ${jsonData['access']}"},
+          );
+          var jsonData2 = jsonDecode(response2.body);
+          _nurseRepo.patientPerformanceData.clear();
+          for (var item in jsonData2) {
+            _nurseRepo.patientPerformanceData
+                .add(PatientPerformanceData.fromJson(item));
+          }
         }
       }
 
@@ -154,6 +303,32 @@ class NurseServices extends GetxController {
         Get.snackbar("Success", "Data added successfully",
             backgroundColor: Colors.blueAccent.withOpacity(0.3));
       }
+      // Check for expire token
+      if (response.statusCode == 401) {
+        var response = await http.post(
+          Uri.parse('${backendRequestUrl}auth/jwt/refresh/'),
+          headers: {"authorization": "Bearer ${tokenStorage.read("token")}"},
+          body: {"refresh": tokenStorage.read('refresh')},
+        );
+
+        if (response.statusCode == 200) {
+          var jsonData = jsonDecode(response.body);
+          tokenStorage.write('access', jsonData['access']);
+
+          var response2 = await http.post(
+            addPerformanceDataUrl,
+            body: data,
+            headers: {"authorization": "Bearer ${jsonData['access']}"},
+          );
+          var jsonData2 = jsonDecode(response2.body);
+          _nurseRepo.patientPerformanceData
+              .insert(0, PatientPerformanceData.fromJson(jsonData2));
+          _nurseRepo.patientPerformanceData.refresh();
+
+          Get.snackbar("Success", "Data added successfully",
+              backgroundColor: Colors.blueAccent.withOpacity(0.3));
+        }
+      }
     } catch (e) {
       Get.snackbar("Error Message", "Error occured while adding data",
           backgroundColor: Colors.orange.withOpacity(0.3));
@@ -176,6 +351,29 @@ class NurseServices extends GetxController {
               .add(DiagnosisPrescriptionModel.fromJson(item));
         }
       }
+      if (response.statusCode == 401) {
+        var response = await http.post(
+          Uri.parse('${backendRequestUrl}auth/jwt/refresh/'),
+          headers: {"authorization": "Bearer ${tokenStorage.read("token")}"},
+          body: {"refresh": tokenStorage.read('refresh')},
+        );
+
+        if (response.statusCode == 200) {
+          var jsonData = jsonDecode(response.body);
+          tokenStorage.write('access', jsonData['access']);
+
+          var response2 = await http.get(
+            diagnosisPrescriptionUrl,
+            headers: {"authorization": "Bearer ${jsonData['access']}"},
+          );
+          var jsonData2 = jsonDecode(response2.body);
+          _nurseRepo.patientDiagnosisPrescription.clear();
+          for (var item in jsonData2) {
+            _nurseRepo.patientDiagnosisPrescription
+                .add(DiagnosisPrescriptionModel.fromJson(item));
+          }
+        }
+      }
 
       _nurseRepo.patientDiagnosisPrescription.refresh();
     } catch (e) {}
@@ -195,6 +393,29 @@ class NurseServices extends GetxController {
         showAdministerDrugModal.value = false;
         Get.snackbar("Succcess", "Injection has been successfully Administered",
             backgroundColor: Colors.blueAccent.withOpacity(0.3));
+      }
+
+      if (response.statusCode == 401) {
+        var response = await http.post(
+          Uri.parse('${backendRequestUrl}auth/jwt/refresh/'),
+          headers: {"authorization": "Bearer ${tokenStorage.read("token")}"},
+          body: {"refresh": tokenStorage.read('refresh')},
+        );
+
+        if (response.statusCode == 200) {
+          var jsonData = jsonDecode(response.body);
+          tokenStorage.write('access', jsonData['access']);
+
+          var response2 = await http.put(diagnosisPrescriptionUrl,
+              headers: {"authorization": "Bearer ${jsonData['access']}"},
+              body: {});
+          if (response2.statusCode == 200) {
+            showAdministerDrugModal.value = false;
+            Get.snackbar(
+                "Succcess", "Injection has been successfully Administered",
+                backgroundColor: Colors.blueAccent.withOpacity(0.3));
+          }
+        }
       }
     } catch (e) {
       Get.snackbar("Error Message", "Injection not administered",

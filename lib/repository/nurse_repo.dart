@@ -14,10 +14,10 @@ class NursesRepository extends GetxController {
   RxList<dynamic> _bedSpaceList = [].obs;
   RxList get bedSpaceList => _bedSpaceList;
 
-  RxList<dynamic> _wardReports = [].obs;
+  RxList _wardReports = [].obs;
   RxList get WardReport => _wardReports;
 
-  RxList<dynamic> _opdList = [].obs;
+  RxList _opdList = [].obs;
   RxList get opdList => _opdList;
 
   RxList<dynamic> _patientDiagnosisList = [].obs;

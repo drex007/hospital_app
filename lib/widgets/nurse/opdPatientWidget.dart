@@ -41,13 +41,12 @@ class _OpdListState extends State<OpdList> {
           return InkWell(
               onTap: () => {
                     _nursesRepository.patientPrescribedId.value =
-                        _nursesRepository
-                            .opdList.value[index].patientPrescribed.id,
+                        _nursesRepository.opdList[index].patientPrescribed.id,
                     Get.to(() => OpdPatientDetailWidget(
-                        patientId: _nursesRepository.opdList.value[index]
-                            .diagnosis.diagnosedPatient.pkid,
+                        patientId: _nursesRepository
+                            .opdList[index].diagnosis.diagnosedPatient.pkid,
                         patientName:
-                            "${_nursesRepository.opdList.value[index].diagnosis.diagnosedPatient.firstName} ${_nursesRepository.opdList.value[index].diagnosis.diagnosedPatient.lastName}")),
+                            "${_nursesRepository.opdList[index].diagnosis.diagnosedPatient.firstName} ${_nursesRepository.opdList.value[index].diagnosis.diagnosedPatient.lastName}")),
                   },
               child: Container(
                 height: 10.0.hp,
@@ -75,7 +74,7 @@ class _OpdListState extends State<OpdList> {
                       child: CircleAvatar(
                           backgroundColor: Colors.transparent,
                           backgroundImage: NetworkImage(
-                              "${assetUrl}${_nursesRepository.opdList.value[index].patientPrescribed.profilePhoto}")),
+                              "${assetUrl}${_nursesRepository.opdList[index].patientPrescribed.profilePhoto}")),
                     ),
                     Padding(
                       padding: EdgeInsets.only(left: 15, top: 27),
@@ -83,11 +82,11 @@ class _OpdListState extends State<OpdList> {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            "${_nursesRepository.opdList.value[index].diagnosis.diagnosedPatient.firstName} ${_nursesRepository.opdList.value[index].diagnosis.diagnosedPatient.lastName}",
+                            "${_nursesRepository.opdList[index].diagnosis.diagnosedPatient.firstName} ${_nursesRepository.opdList[index].diagnosis.diagnosedPatient.lastName}",
                             style: TextStyle(fontWeight: FontWeight.w600),
                           ),
                           Text(
-                              "${_nursesRepository.opdList.value[index].patientPrescribed.gender}")
+                              "${_nursesRepository.opdList[index].patientPrescribed.gender}")
                         ],
                       ),
                     ),

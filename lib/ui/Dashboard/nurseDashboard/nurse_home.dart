@@ -47,7 +47,7 @@ class _NursesHomeState extends State<NursesHome> {
       appBar: PreferredSize(
         preferredSize: Size.fromHeight(0.0.hp),
         child: AppBar(
-          backgroundColor: Colors.purple,
+          backgroundColor: customblue,
           elevation: 0,
         ),
       ),
@@ -59,7 +59,7 @@ class _NursesHomeState extends State<NursesHome> {
               Container(
                 height: 100,
                 decoration: BoxDecoration(
-                  color: Colors.purple,
+                  color: customblue,
                   boxShadow: [
                     BoxShadow(
                       blurRadius: 0.5,

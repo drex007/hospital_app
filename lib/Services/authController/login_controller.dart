@@ -30,6 +30,7 @@ class AuthController extends GetxController {
       var response_body = json.decode(response.body);
       var token = response_body["access"];
       auth_storage.write("token", token);
+      auth_storage.write("refresh", response_body['refresh']);
 
       if (response_body["data"]["is_doctor"] == true) {
         _redirectUser.userStatus.value = "doctor";
